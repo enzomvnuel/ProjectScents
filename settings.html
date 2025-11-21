@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Project Scents</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ADDED: General Card/Form Styles for Settings Page */
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-size: 1.1rem;
+        }
+        
+        /* Main Page Logo Styles (Copied for consistency) */
+        .main-page-logo {
+            max-width: 180px; 
+            height: auto;
+            display: block; 
+            margin: 0 auto 2rem auto; 
+            border: none; 
+            filter: none; 
+            transition: none;
+        }
+        .main-page-logo:hover {
+            transform: none; 
+            filter: none; 
+            border-color: transparent;
+            box-shadow: none; 
+        }
+
+        /* Cart Modal Styles for consistency */
+        #cartTotal { color: #000000; }
+        #proceedToCheckoutBtn {
+            background-color: #000000;
+            border-color: #000000;
+            transition: background-color 0.3s;
+        }
+        #proceedToCheckoutBtn:hover {
+            background-color: #333333;
+            border-color: #333333;
+        }
+
+        /* Dark Mode styles (for visual effect) */
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0;
+        }
+        body.dark-mode .card {
+            background-color: #1e1e1e;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+        body.dark-mode .card-header {
+            background-color: #2c2c2c;
+            color: #ffffff;
+        }
+        body.dark-mode .form-label, body.dark-mode .form-text {
+            color: #e0e0e0 !important;
+        }
+        body.dark-mode .form-control {
+            background-color: #333;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12 col-md-3 col-lg-2 p-0">
+                <div class="sidebar d-flex flex-column">
+                    <div class="sidebar-header mb-auto">
+                        <img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Project Scents Logo" class="sidebar-logo mb-3">
+                        <h3 class="fw-bold">Project Scents</h3>
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="home.html">Scents</a>
+                        <a class="nav-link" href="about.html">About Me</a>
+                        <a class="nav-link" href="page1.html">Shop Men</a>
+                        <a class="nav-link" href="page2.html">Shop Women</a>
+                        <a class="nav-link active" href="settings.html">Settings</a> <a class="nav-link" href="#contact">Contact</a>
+                    </nav>
+                    <div class="mt-auto">
+                        <a href="index.html" class="btn btn-outline-light back-btn">← SIGN OUT</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-9 col-lg-10 position-relative"> 
+
+                <button class="btn btn-dark position-absolute top-0 end-0 mt-3 me-3" onclick="renderCart(true)" type="button" style="z-index: 10;">
+                    <i class="fas fa-shopping-cart me-2"></i> View Cart
+                </button>
+                <section id="settings-page" class="main-content container my-5">
+                    <img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Project scents Logo" class="main-page-logo">
+
+                    <h2 class="text-center mb-5">ACCOUNT SETTINGS</h2>
+
+                    <div class="card mb-4">
+                        <div class="card-header fw-bold"><i class="fas fa-palette me-2"></i> Theme Preferences</div>
+                        <div class="card-body">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                                <label class="form-check-label" for="darkModeSwitch">
+                                    Enable Dark Mode
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Toggle between light and dark themes.</small>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header fw-bold"><i class="fas fa-lock me-2"></i> Update Password</div>
+                        <div class="card-body">
+                            <form id="updatePasswordForm">
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                    <input type="password" class="form-control" id="currentPassword" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword" required minlength="8">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirmNewPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-dark w-100">Change Password</button>
+                                <div id="passwordMessage" class="mt-3 d-none alert"></div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header fw-bold"><i class="fas fa-bell me-2"></i> Email Notifications</div>
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="updatesEmail" checked>
+                                <label class="form-check-label" for="updatesEmail">
+                                    Product Updates and Newsletters
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="orderStatusEmail" checked>
+                                <label class="form-check-label" for="orderStatusEmail">
+                                    Order Status and Shipment Tracking
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="offersEmail">
+                                <label class="form-check-label" for="offersEmail">
+                                    Exclusive Offers and Promotions
+                                </label>
+                            </div>
+                            <button class="btn btn-dark mt-3 w-100" onclick="saveNotifications()">Save Notification Settings</button>
+                            <div id="notificationMessage" class="mt-3 d-none alert"></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="contact" class="main-content container my-5">
+                    <h2 class="text-center mb-5"> CONTACT PROJECT SCENTS</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <p class="text-center lead">For inquiries, collaborations, or custom orders, please reach out:</p>
+                            <ul class="list-unstyled text-center social-links">
+                                <li><strong>Email:</strong> <a href="mailto:projectscents@gmail.com">projectscents@gmail.com</a></li>
+                                <li><strong>Instagram:</strong> <a href="https://www.instagram.com/projectscents" target="_blank">@projectscents</a></li>
+                                <li><strong>Phone:</strong> +63 977 491 0529</li>
+                            </ul>
+                            <p class="text-center mt-4">You can also fill out the form below:</p>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="cartItemsContainer">
+                    <p class="text-center text-muted m-4">Your cart is empty. Start shopping!</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-between align-items-center">
+                    <h5 id="cartTotal" class="mb-0 fw-bold">Total: ₱0.00</h5>
+                    <button type="button" class="btn btn-primary" id="proceedToCheckoutBtn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // --- START: Cart Functionality (Copied for consistency) ---
+        const PRODUCT_DATA = {
+            'men-1': { id: 'men-1', name: 'Aromatic Citrus', price: '₱1200.00', image: 'https://images.unsplash.com/photo-1596765793446-0b892a0d7a04?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+            'men-2': { id: 'men-2', name: 'Woody Spice', price: '₱1500.00', image: 'https://images.unsplash.com/photo-1595183864757-0a2a4b87d6e6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+            'women-1': { id: 'women-1', name: 'Floral Bloom', price: '₱1350.00', image: 'https://images.unsplash.com/photo-1596467008139-4443187216a9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+            'women-2': { id: 'women-2', name: 'Sweet Vanilla', price: '₱1100.00', image: 'https://images.unsplash.com/photo-1558229988-1a5c6af7355a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        };
+
+        function getCart() {
+            try {
+                const cartData = localStorage.getItem('shoppingCart');
+                return cartData ? JSON.parse(cartData) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            try {
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            } catch (e) {
+                // Do nothing
+            }
+        }
+        
+        function getProductImage(productId) {
+            const product = PRODUCT_DATA[productId];
+            return product ? product.image : 'https://via.placeholder.com/70x70?text=Scent'; 
+        }
+
+        window.updateQuantity = function(productId, change) {
+            let cart = getCart();
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += change;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveCart(cart);
+                renderCart(true);
+            }
+        }
+
+        window.removeItem = function(productId) {
+            let cart = getCart();
+            cart = cart.filter(item => item.id !== productId);
+            saveCart(cart);
+            renderCart(true);
+        }
+
+        window.renderCart = function(showModal = false) {
+            const container = document.getElementById('cartItemsContainer');
+            const totalElement = document.getElementById('cartTotal');
+            const proceedBtn = document.getElementById('proceedToCheckoutBtn');
+            let cart = getCart();
+            let cartHTML = '';
+            let grandTotal = 0;
+
+            if (cart.length === 0) {
+                cartHTML = '<p class="text-center text-muted m-4">Your cart is empty. Start shopping!</p>';
+                proceedBtn.disabled = true;
+            } else {
+                proceedBtn.disabled = false;
+                
+                cart.forEach(item => {
+                    const itemPriceNumeric = parseFloat(item.price.replace('₱', '').replace(/,/g, ''));
+                    const itemTotal = itemPriceNumeric * item.quantity;
+                    grandTotal += itemTotal;
+
+                    cartHTML += `
+                        <div class="d-flex align-items-center mb-3 p-2 border-bottom">
+                            <img src="${getProductImage(item.id)}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: cover; margin-right: 15px; border-radius: 5px;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-bold">${item.name}</h6>
+                                <small class="text-muted">${item.price}</small>
+                            </div>
+                            <div class="d-flex align-items-center me-3">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity('${item.id}', -1)" aria-label="Decrease quantity" style="width: 30px;">-</button>
+                                <span class="mx-2">${item.quantity}</span>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity('${item.id}', 1)" aria-label="Increase quantity" style="width: 30px;">+</button>
+                            </div>
+                            <div class="text-end" style="min-width: 100px;">
+                                <span class="d-block fw-bold">₱${itemTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger ms-3" onclick="removeItem('${item.id}')" aria-label="Remove item">X</button>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = cartHTML;
+            totalElement.textContent = `Total: ₱${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            if (showModal) {
+                const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                cartModal.show();
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const proceedBtn = document.getElementById('proceedToCheckoutBtn');
+            if (proceedBtn) {
+                proceedBtn.addEventListener('click', function() {
+                    if (getCart().length > 0) {
+                        window.location.href = 'checkout.html';
+                    } else {
+                        alert('Your cart is empty. Please add items before checking out.');
+                    }
+                });
+            }
+        });
+        // --- END: Cart Functionality ---
+
+        // --- START: Settings Page Functionality ---
+
+        // Theme Switch Logic
+        const darkModeSwitch = document.getElementById('darkModeSwitch');
+        
+        function applyTheme(isDark) {
+            document.body.classList.toggle('dark-mode', isDark);
+            localStorage.setItem('darkModeEnabled', isDark);
+            darkModeSwitch.checked = isDark;
+        }
+
+        // Initialize theme on load
+        const savedTheme = localStorage.getItem('darkModeEnabled') === 'true';
+        applyTheme(savedTheme);
+
+        // Event listener for theme switch
+        if (darkModeSwitch) {
+            darkModeSwitch.addEventListener('change', (e) => {
+                applyTheme(e.target.checked);
+            });
+        }
+
+        // Password Update Logic (Placeholder)
+        const passwordForm = document.getElementById('updatePasswordForm');
+        if (passwordForm) {
+            passwordForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+                const messageDiv = document.getElementById('passwordMessage');
+                
+                messageDiv.classList.add('d-none');
+                messageDiv.classList.remove('alert-success', 'alert-danger');
+
+                if (newPassword !== confirmNewPassword) {
+                    messageDiv.textContent = 'Error: New passwords do not match.';
+                    messageDiv.classList.add('alert-danger');
+                } else if (newPassword.length < 8) {
+                    messageDiv.textContent = 'Error: Password must be at least 8 characters long.';
+                    messageDiv.classList.add('alert-danger');
+                } else {
+                    // NOTE: In a real application, you would send currentPassword and newPassword to a server for validation and update.
+                    // For this example, we assume success.
+                    messageDiv.textContent = 'Success: Your password has been updated!';
+                    messageDiv.classList.add('alert-success');
+                    passwordForm.reset();
+                }
+                messageDiv.classList.remove('d-none');
+            });
+        }
+
+        // Notification Save Logic (Placeholder)
+        window.saveNotifications = function() {
+            const updates = document.getElementById('updatesEmail').checked;
+            const orderStatus = document.getElementById('orderStatusEmail').checked;
+            const offers = document.getElementById('offersEmail').checked;
+            const messageDiv = document.getElementById('notificationMessage');
+
+            // NOTE: In a real application, you would send these values to a server.
+            localStorage.setItem('emailNotifications', JSON.stringify({ updates, orderStatus, offers }));
+
+            messageDiv.classList.remove('d-none', 'alert-danger');
+            messageDiv.classList.add('alert-success');
+            messageDiv.textContent = 'Success: Your notification settings have been saved!';
+            messageDiv.classList.remove('d-none');
+        }
+
+        // Load saved notification settings on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedSettings = JSON.parse(localStorage.getItem('emailNotifications'));
+            if (savedSettings) {
+                document.getElementById('updatesEmail').checked = savedSettings.updates;
+                document.getElementById('orderStatusEmail').checked = savedSettings.orderStatus;
+                document.getElementById('offersEmail').checked = savedSettings.offers;
+            }
+        });
+        // --- END: Settings Page Functionality ---
+    </script>
+</body>
+</html>

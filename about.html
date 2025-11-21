@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Project Scents</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Cart Button Styles (Copied for consistency) */
+        .view-cart-btn {
+            background-color: #f8f9fa;
+            color: #000000;
+            border: 1px solid #000000;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .view-cart-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .modal-header.bg-dark .btn-close-white {
+            filter: invert(1);
+        }
+        
+        /* Specific Styles for About Us page */
+        .member-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12 col-md-3 col-lg-2 p-0">
+                <div class="sidebar d-flex flex-column">
+                    <div class="sidebar-header mb-auto">
+                        <img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Project Scents Logo" class="sidebar-logo mb-3">
+                        <h3 class="fw-bold">Project Scents</h3>
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="home.html">Scents</a>
+                        <a class="nav-link" href="about.html">About Me</a>
+                        <a class="nav-link active" href="page1.html">Shop Men</a>
+                        <a class="nav-link" href="page2.html">Shop Women</a>
+			<a class="nav-link" href="settings.html">Settings</a>
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </nav>
+                    <div class="mt-auto">
+                        <a href="home.html" class="btn btn-outline-light back-btn">← BACK</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-9 col-lg-10">
+                
+                <div class="container-fluid pt-3 pe-4 d-flex justify-content-end">
+                    <button class="btn view-cart-btn" onclick="viewCart()">View Cart 🛒</button>
+                </div>
+
+                <section id="about-us" class="main-content container my-5">
+ <img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Project Scents Logo" class="sidebar-logo mb-3">
+                    <h2 class="text-center mb-5">ABOUT US</h2>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <p class="lead text-center mb-5">
+                                Project Scents is a passion project brought to life by a team dedicated to curating and sharing the world's finest fragrances. We believe that scent is more than just an accessory—it's an expression of identity and memory.
+                            </p>
+                            
+                            <h3 class="text-center mb-4">The Founders</h3>
+                            <ul class="list-unstyled text-center">
+                                <li class="member-name">Enzo Manuel Reyes</li>
+                                <li class="member-name">Mark Andrei Michael</li>
+                                <li class="member-name">Lance Christian Cordova</li>
+                                <li class="member-name">Kai Ohira</li>
+                            </ul>
+                            
+                            <p class="text-center mt-5">
+                                Our mission is to provide an accessible and curated platform for both fragrance newcomers and seasoned enthusiasts. Thank you for being a part of the Project Scents journey.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="main-content container my-5">
+                    <h2 class="text-center mb-5">Contact Project Scents</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <p class="text-center lead">For inquiries, collaborations, or custom orders, please reach out:</p>
+                            <ul class="list-unstyled text-center social-links">
+                                <li><strong>Email:</strong> <a href="mailto:projectscents@gmail.com">projectscents@gmail.com</a></li>
+                                <li><strong>Instagram:</strong> <a href="https://www.instagram.com/projectscents" target="_blank">@projectscents</a></li>
+                                <li><strong>Phone:</strong> +63 977 491 0529</li>
+                            </ul>
+                            <p class="text-center mt-4">You can also fill out the form below:</p>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="cartModalLabel">Shopping Cart 🛒</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItemsContainer" class="list-group">
+                        <p class="text-center text-muted">Your cart is currently empty.</p>
+                    </div>
+                    <div id="cartTotal" class="mt-4 text-end fw-bold fs-5">
+                        Total: ₱0.00
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button type="button" class="btn btn-dark" id="proceedToCheckoutBtn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+        <div id="cartToast" class="toast align-items-center text-white bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <span id="toastMessage">Item added to cart!</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Copy-paste all cart functions from page1.html to ensure consistency across pages
+        function getProductImage(productId) {
+            const imageMap = {
+                'men-001': 'https://www.perfumestudiomnl.com/cdn/shop/products/image_c2a2b7d1-6bb1-4186-8905-4ba833ead6e6.jpg?v=1617461811',
+                'men-002': 'https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/2272645.jpg',
+                'men-003': 'https://rustans-thebeautysource.com/en/wp-content/uploads/2024/09/3254397.jpg',
+                'men-004': 'https://ifragranceofficial.com/wp-content/uploads/2023/01/rTJRtm1073334-0-global.jpeg',
+                'men-005': 'https://the-fragrance-shop.imgix.net/products/62902--new--.jpg?fm=webp',
+                'men-006': 'https://gordonsdirect.com/cdn/shop/files/3614274219548-5.gif?v=1738921159',
+                'women-001': 'https://philregalo.com/cdn/shop/products/n-5-eau-de-parfum-spray-3-4fl-oz--packshot-default-125530-8833876492318.jpg?v=1634805457',
+                'women-002': 'https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/1511153.jpg',
+                'women-003': 'https://gordonsdirect.com/cdn/shop/products/black-opium.jpg?v=1623852940',
+                'women-004': 'https://www.scentimesmnl.com/cdn/shop/files/P_Valentino_Donna_Born_In_Roma_Intense.jpg?v=1743483219&width=1445',
+                'women-005': 'https://www.houseoffraser.co.uk/images/imgzoom/75/75245969_xxl.jpg',
+                'women-006': 'https://www.scentimesmnl.com/cdn/shop/files/P_Emporio_Armni-In_Love_With_You_2ef065d6-edb7-4b8a-9937-7b8f04b6b5f8.jpg?v=1743580135&width=1445',
+            };
+            return imageMap[productId] || 'placeholder.jpg';
+        }
+
+        function parsePrice(priceString) {
+            return parseFloat(priceString.replace('₱', '').replace(/,/g, '')) || 0;
+        }
+        
+        function showToast(message) {
+            const toastEl = document.getElementById('cartToast');
+            const toastMessageEl = document.getElementById('toastMessage');
+            toastMessageEl.textContent = message;
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        function addToCart(buttonElement, productIdToIncrement = null) {
+            let productId = productIdToIncrement;
+            if (!productIdToIncrement) return; 
+            
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+                showToast(`Quantity of ${cart[existingItemIndex].name} updated!`);
+            } 
+            else {
+                 showToast(`Error: Product ID ${productId} not found in cart.`);
+                 return;
+            }
+
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            viewCart(false); 
+        }
+        
+        function decreaseQuantity(productId) {
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+                const name = cart[existingItemIndex].name;
+                cart[existingItemIndex].quantity -= 1;
+                
+                if (cart[existingItemIndex].quantity <= 0) {
+                    cart.splice(existingItemIndex, 1);
+                    showToast(`${name} removed from cart.`);
+                } else {
+                    showToast(`Quantity of ${name} updated!`);
+                }
+                
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                viewCart(false);
+            }
+        }
+
+        function removeItem(productId) {
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const itemToRemove = cart.find(item => item.id === productId);
+            
+            cart = cart.filter(item => item.id !== productId);
+            
+            if (itemToRemove) {
+                 showToast(`${itemToRemove.name} removed from cart.`);
+            }
+            
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            viewCart(false);
+        }
+
+        function viewCart(showModal = true) {
+            const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const container = document.getElementById('cartItemsContainer');
+            const totalElement = document.getElementById('cartTotal');
+            let grandTotal = 0;
+            let cartHTML = '';
+
+            if (cart.length === 0) {
+                cartHTML = '<p class="text-center text-muted">Your cart is currently empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const itemPriceNumeric = parsePrice(item.price);
+                    const itemTotal = itemPriceNumeric * item.quantity;
+                    grandTotal += itemTotal;
+
+                    cartHTML += `
+                        <div class="d-flex align-items-center mb-3 p-2 border-bottom">
+                            <img src="${getProductImage(item.id)}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: cover; margin-right: 15px; border-radius: 5px;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-bold">${item.name}</h6>
+                                <small class="text-muted">${item.price}</small>
+                            </div>
+                            <div class="quantity-controls d-flex align-items-center me-3">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="decreaseQuantity('${item.id}')" aria-label="Decrease quantity" style="width: 30px;">-</button>
+                                <span class="fw-bold mx-2">${item.quantity}</span>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="addToCart(null, '${item.id}')" aria-label="Increase quantity" style="width: 30px;">+</button>
+                            </div>
+                            <div class="text-end" style="min-width: 100px;">
+                                <span class="d-block fw-bold">₱${itemTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger ms-3" onclick="removeItem('${item.id}')" aria-label="Remove item">X</button>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = cartHTML;
+            totalElement.textContent = `Total: ₱${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            if (showModal) {
+                const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                cartModal.show();
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const proceedBtn = document.getElementById('proceedToCheckoutBtn');
+            if (proceedBtn) {
+                proceedBtn.addEventListener('click', function() {
+                    window.location.href = 'checkout.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

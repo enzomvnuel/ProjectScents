@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jean Paul Gaultier: Gaultier Divine Intense - Project Scents</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .item-detail-section {
+            padding: 40px 0;
+        }
+        .item-detail-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .item-detail-price {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .item-detail-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .main-image-container {
+            width: 450px;
+            height: 450px;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease-in-out;
+            display: block;
+        }
+        .main-image-container:hover .main-image {
+            transform: scale(1.5);
+            transform-origin: center center;
+            cursor: zoom-in;
+        }
+        .thumbnails-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+            opacity: 0.7;
+        }
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .thumbnail.active {
+            border-color: #007bff;
+            opacity: 1;
+        }
+
+        /* START: ADDED Shopping Cart Button Styles */
+        .add-to-cart-btn {
+            background-color: #000000;
+            color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            letter-spacing: 0.1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #333333;
+            color: #ffffff;
+            border-color: #333333;
+        }
+
+        .view-cart-btn {
+            background-color: #f8f9fa; /* Light background to stand out */
+            color: #000000;
+            border: 1px solid #000000;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-cart-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Style for the close button in the dark modal header */
+        .modal-header.bg-dark .btn-close-white {
+            filter: invert(1);
+        }
+        /* END: ADDED Shopping Cart Button Styles */
+
+        @media (max-width: 767.98px) {
+            .main-image-container {
+                width: 300px;
+                height: 300px;
+            }
+            .thumbnail {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12 col-md-3 col-lg-2 p-0">
+                <div class="sidebar d-flex flex-column">
+                    <div class="sidebar-header mb-auto">
+                        <img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Enzo Perfumery Logo" class="sidebar-logo mb-3">
+                        <h3 class="fw-bold">Project Scents</h3>
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="home.html">Scents</a>
+                        <a class="nav-link" href="about.html">About Me</a>
+                        <a class="nav-link" href="page1.html">Shop Men</a>
+                        <a class="nav-link active" href="page2.html">Shop Women</a>
+                        <a class="nav-link" href="settings.html">Settings</a>
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </nav>
+                    <div class="mt-auto">
+                        <a href="page2.html" class="btn btn-outline-light back-btn">← BACK TO SHOP WOMEN</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-9 col-lg-10">
+
+                <div class="container-fluid pt-3 pe-4 d-flex justify-content-end">
+                    <button class="btn view-cart-btn" onclick="viewCart()">View Cart 🛒</button>
+                </div>
+                <section id="item-detail" class="main-content container my-5 item-detail-section">
+                    <div class="row">
+                        <div class="col-md-6 d-flex flex-column align-items-center">
+                            <div class="main-image-container">
+                                <img id="mainProductImage" src="https://www.houseoffraser.co.uk/images/imgzoom/75/75245969_xxl.jpg" class="main-image" alt="Jean Paul Gaultier: Gaultier Divine Intense">
+                            </div>
+                            <div class="thumbnails-container">
+                                <img src="https://www.houseoffraser.co.uk/images/imgzoom/75/75245969_xxl.jpg" class="thumbnail active" onclick="changeMainImage(this)" alt="Gaultier Divine Intense View 1">
+                                <img src="https://img.kingpowerclick.com/cdn-cgi/image/format=auto/kingpower-com/image/upload/w_640/prod/1051564-L1.jpg" class="thumbnail" onclick="changeMainImage(this)" alt="Gaultier Divine Intense View 2">
+                                <img src="https://cdn2.jomashop.com/media/catalog/product/cache/0ee3019724ce73007b606b54ba535a23/j/e/jean-paul-gaultier-ladies-divine-le-parfum-edp-spray-34-oz-fragrances-8435415091169_3.jpg?width=546&height=546" class="thumbnail" onclick="changeMainImage(this)" alt="Gaultier Divine Intense View 3">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h1 class="item-detail-title">Jean Paul Gaultier: Gaultier Divine Intense</h1>
+                            <p class="item-detail-price">₱7,500.00</p>
+                            <div class="item-detail-description">
+                                <p>Jean Paul Gaultier: Gaultier Divine Intense is a radiant floral marine fragrance for women, launched in 2023. This scent celebrates femininity in all its glory, embodying a powerful and dazzling goddess.</p>
+                                <p>It's a bold and captivating interpretation of the original Divine, with an even more opulent and solar presence. The fragrance beautifully balances a salty aquatic note with luscious floral and sweet undertones, creating an unforgettable aroma.</p>
+                                <p><strong>Top note:</strong> Calypsone (a marine note)</p>
+                                <p><strong>Middle notes:</strong> Lily, Ylang-Ylang, Jasmine</p>
+                                <p><strong>Base notes:</strong> Meringue, Patchouli</p>
+                                <p>Gaultier Divine Intense is perfect for making a grand entrance and leaving a luminous, memorable impression, ideal for both day and evening wear.</p>
+                            </div>
+                            <div class="product-actions mt-4">
+                                <button class="btn add-to-cart-btn w-100" 
+                                        data-product-id="women-005" 
+                                        onclick="addToCart(this)">
+                                    ADD TO CART
+                                </button>
+                            </div>
+                            </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="main-content container my-5">
+                    <h2 class="text-center mb-5">CONTACT PROJECT SCENTS</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <p class="text-center lead">For inquiries, collaborations, or custom orders, please reach out:</p>
+                            <ul class="list-unstyled text-center social-links">
+                                <li><strong>Email:</strong> <a href="mailto:projectscents@gmail.com">projectscents@gmail.com</a></li>
+                                <li><strong>Instagram:</strong> <a href="https://www.instagram.com/projectscents" target="_blank">@projectscents</a></li>
+                                <li><strong>Phone:</strong> +63 977 491 0529</li>
+                            </ul>
+                            <p class="text-center mt-4">You can also fill out the form below:</p>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="cartModalLabel">Shopping Cart 🛒</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItemsContainer" class="list-group">
+                        <p class="text-center text-muted">Your cart is currently empty.</p>
+                    </div>
+                    <div id="cartTotal" class="mt-4 text-end fw-bold fs-5">
+                        Total: ₱0.00
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button type="button" class="btn btn-dark" id="proceedToCheckoutBtn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+        <div id="cartToast" class="toast align-items-center text-white bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <span id="toastMessage">Item added to cart!</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeMainImage(thumbnail) {
+            const mainProductImage = document.getElementById('mainProductImage');
+            mainProductImage.src = thumbnail.src;
+
+            // Remove 'active' class from all thumbnails and add to the clicked one
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+
+            thumbnail.classList.add('active');
+        }
+
+        /* START: ADDED Cart JavaScript Logic */
+        // Utility function to get product image source based on product ID
+        function getProductImage(productId) {
+            // Map product IDs to their corresponding image URLs
+            // !!! ENSURE ALL YOUR PRODUCTS ARE MAPPED HERE !!!
+            const imageMap = {
+                'men-001': 'https://www.perfumestudiomnl.com/cdn/shop/products/image_c2a2b7d1-6bb1-4186-8905-4ba833ead6e6.jpg?v=1617461811', // Bleu De Chanel
+                'men-002': 'https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/2272645.jpg', // Dior Sauvage
+                'men-003': 'https://rustans-thebeautysource.com/en/wp-content/uploads/2024/09/3254397.jpg', // YSL Y EDP
+                'men-004': 'https://ifragranceofficial.com/wp-content/uploads/2023/01/rTJRtm1073334-0-global.jpeg', // Valentino Uomo
+                'men-005': 'https://the-fragrance-shop.imgix.net/products/62902--new--.jpg?fm=webp', // JPG Le Male
+                'men-006': 'https://gordonsdirect.com/cdn/shop/files/3614274219548-5.gif?v=1738921159', // Armani Stronger With You
+                'women-001': 'https://philregalo.com/cdn/shop/products/n-5-eau-de-parfum-spray-3-4fl-oz--packshot-default-125530-8833876492318.jpg?v=1634805457', // Chanel No. 5
+                'women-002': 'https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/1511153.jpg', // Miss Dior
+                'women-003': 'https://gordonsdirect.com/cdn/shop/products/black-opium.jpg?v=1623852940', // YSL Black Opium
+                'women-004': 'https://www.scentimesmnl.com/cdn/shop/files/P_Valentino_Donna_Born_In_Roma_Intense.jpg?v=1743483219&width=1445', // Valentino Donna Born In Roma Intense
+                'women-005': 'https://www.houseoffraser.co.uk/images/imgzoom/75/75245969_xxl.jpg', // Jean Paul Gaultier Divine Intense (This product)
+                'women-006': 'https://www.scentimesmnl.com/cdn/shop/files/P_Emporio_Armni-In_Love_With_You_2ef065d6-edb7-4b8a-9937-7b8f04b6b5f8.jpg?v=1743580135&width=1445', // Emporio Armani In Love With You
+            };
+            return imageMap[productId] || 'placeholder.jpg';
+        }
+
+        // Function to extract numeric price from string (e.g., "₱10,000.00" -> 10000)
+        function parsePrice(priceString) {
+            return parseFloat(priceString.replace('₱', '').replace(/,/g, '')) || 0;
+        }
+
+        // Helper function to show a Bootstrap toast notification
+        function showToast(message) {
+            const toastEl = document.getElementById('cartToast');
+            const toastMessageEl = document.getElementById('toastMessage');
+            toastMessageEl.textContent = message;
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        // Add to Cart Logic
+        function addToCart(buttonElement, productIdToIncrement = null) {
+            let productId;
+            let productName;
+            let productPrice;
+            let isIncrementFromModal = false;
+
+            if (buttonElement && !productIdToIncrement) {
+                // Scenario 1: Called from product detail page (ADD TO CART button)
+                productId = buttonElement.getAttribute('data-product-id');
+                // On a detail page, we look up the prominent title/price elements
+                productName = document.querySelector('.item-detail-title').textContent.trim();
+                productPrice = document.querySelector('.item-detail-price').textContent.trim();
+            } else if (productIdToIncrement) {
+                // Scenario 2: Called from cart modal (+) button
+                productId = productIdToIncrement;
+                isIncrementFromModal = true;
+                let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+                const item = cart.find(i => i.id === productId);
+                if (!item) return;
+                productName = item.name;
+                productPrice = item.price;
+            } else {
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+                if (!isIncrementFromModal) {
+                    showToast(`${productName} added to cart!`);
+                } else {
+                    showToast(`Quantity of ${productName} updated!`);
+                }
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                });
+                showToast(`${productName} added to cart!`);
+            }
+
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+
+            // If called from the modal, re-render the cart display
+            if (isIncrementFromModal) {
+                viewCart(false);
+            }
+        }
+
+        // Decrease Quantity Logic (handles the '-' button)
+        function decreaseQuantity(productId) {
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+                const name = cart[existingItemIndex].name;
+                cart[existingItemIndex].quantity -= 1;
+
+                if (cart[existingItemIndex].quantity <= 0) {
+                    cart.splice(existingItemIndex, 1);
+                    showToast(`${name} removed from cart.`);
+                } else {
+                    showToast(`Quantity of ${name} updated!`);
+                }
+
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                viewCart(false);
+            }
+        }
+
+        // Remove Item Logic (handles the 'X' button)
+        function removeItem(productId) {
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const itemToRemove = cart.find(item => item.id === productId);
+
+            cart = cart.filter(item => item.id !== productId);
+
+            if (itemToRemove) {
+                 showToast(`${itemToRemove.name} removed from cart.`);
+            }
+
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            viewCart(false);
+        }
+
+        // View Cart Logic (uses Modal)
+        function viewCart(showModal = true) {
+            const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const container = document.getElementById('cartItemsContainer');
+            const totalElement = document.getElementById('cartTotal');
+            let grandTotal = 0;
+            let cartHTML = '';
+
+            if (cart.length === 0) {
+                cartHTML = '<p class="text-center text-muted">Your cart is currently empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const itemPriceNumeric = parsePrice(item.price);
+                    const itemTotal = itemPriceNumeric * item.quantity;
+                    grandTotal += itemTotal;
+
+                    cartHTML += `
+                        <div class="d-flex align-items-center mb-3 p-2 border-bottom">
+                            <img src="${getProductImage(item.id)}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: cover; margin-right: 15px; border-radius: 5px;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-bold">${item.name}</h6>
+                                <small class="text-muted">${item.price}</small>
+                            </div>
+                            <div class="quantity-controls d-flex align-items-center me-3">
+                                <button class="btn btn-sm btn-outline-secondary" onclick="decreaseQuantity('${item.id}')" aria-label="Decrease quantity" style="width: 30px;">-</button>
+                                <span class="fw-bold mx-2">${item.quantity}</span>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="addToCart(null, '${item.id}')" aria-label="Increase quantity" style="width: 30px;">+</button>
+                            </div>
+                            <div class="text-end" style="min-width: 100px;">
+                                <span class="d-block fw-bold">₱${itemTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger ms-3" onclick="removeItem('${item.id}')" aria-label="Remove item">X</button>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = cartHTML;
+            totalElement.textContent = `Total: ₱${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            if (showModal) {
+                // Open the modal using Bootstrap's JavaScript API
+                const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                cartModal.show();
+            }
+        }
+
+        // Logic to handle checkout button redirection
+        document.addEventListener('DOMContentLoaded', function() {
+            const proceedBtn = document.getElementById('proceedToCheckoutBtn');
+            if (proceedBtn) {
+                proceedBtn.addEventListener('click', function() {
+                    window.location.href = 'checkout.html';
+                });
+            }
+        });
+        /* END: ADDED Cart JavaScript Logic */
+    </script>
+</body>
+</html>
