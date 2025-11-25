@@ -115,11 +115,21 @@
                 <div class="container-fluid pt-3 pe-4 d-flex justify-content-end">
                     <button class="btn view-cart-btn" onclick="viewCart()">View Cart 🛒</button>
                 </div>
+                
                 <section id="shop-items" class="main-content container my-5">
-                    <h2 class="text-center mb-5">FOR WOMEN</h2>
-                    <div class="row g-4">
+                    <h2 class="text-center mb-4">FOR WOMEN</h2>
+                    
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-md-8 col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="productSearch" onkeyup="filterProducts()" placeholder="Search Women's Perfumes...">
+                                <span class="input-group-text bg-white border-start-0"><i class="fas fa-search"></i>🔍</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4" id="productGrid">
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item" data-product-name="Chanel No. 5">
                             <a href="women-item-1.html">
                                 <img src="https://philregalo.com/cdn/shop/products/n-5-eau-de-parfum-spray-3-4fl-oz--packshot-default-125530-8833876492318.jpg?v=1634805457" class="item-img" alt="Item 1">
                             </a>
@@ -134,7 +144,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item" data-product-name="Christian Dior J'adore">
                             <a href="women-item-2.html">
                                 <img src="https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/1511153.jpg" class="item-img" alt="Item 2">
                             </a>
@@ -149,7 +159,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item" data-product-name="Yves Saint Laurent Black Opium">
                             <a href="women-item-3.html">
                                 <img src="https://gordonsdirect.com/cdn/shop/products/black-opium.jpg?v=1623852940" class="item-img" alt="Item 3">
                             </a>
@@ -164,7 +174,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item" data-product-name="Valentino Donna Born In Roma Intense">
                             <a href="women-item-4.html">
                                 <img src="https://www.scentimesmnl.com/cdn/shop/files/P_Valentino_Donna_Born_In_Roma_Intense.jpg?v=1743483219&width=1445" class="item-img" alt="Item 4">
                             </a>
@@ -179,7 +189,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item" data-product-name="Jean Paul Gaultier: Gaultier Divine Intense">
                             <a href="women-item-5.html">
                                 <img src="https://www.houseoffraser.co.uk/images/imgzoom/75/75245969_xxl.jpg" class="item-img" alt="Item 5">
                             </a>
@@ -194,7 +204,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item" data-product-name="Emporio Armani In Love With You">
                             <a href="women-item-6.html">
                                 <img src="https://www.scentimesmnl.com/cdn/shop/files/P_Emporio_Armni-In_Love_With_You_2ef065d6-edb7-4b8a-9937-7b8f04b6b5f8.jpg?v=1743580135&width=1445" class="item-img" alt="Item 6">
                             </a>
@@ -339,7 +349,7 @@
                 // Get product details from the existing cart item to update it
                 let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
                 const item = cart.find(i => i.id === productId);
-                if (!item) return; 
+                if (!item) return;	
                 productName = item.name;
                 productPrice = item.price;
             } else {
@@ -355,11 +365,11 @@
                     showToast(`${productName} added to cart!`);
                 }
             } else {
-                cart.push({ 
-                    id: productId, 
+                cart.push({	
+                    id: productId,	
                     name: productName,
                     price: productPrice,
-                    quantity: 1 
+                    quantity: 1	
                 });
                 showToast(`${productName} added to cart!`);
             }
@@ -450,6 +460,29 @@
             }
         }
         
+        // --- NEW SEARCH FUNCTIONALITY ---
+        function filterProducts() {
+            const input = document.getElementById('productSearch');
+            const filter = input.value.toUpperCase();
+            const productGrid = document.getElementById('productGrid');
+            const items = productGrid.getElementsByClassName('product-item');
+
+            for (let i = 0; i < items.length; i++) {
+                // Get the product name from the data-product-name attribute
+                const name = items[i].getAttribute('data-product-name');
+                
+                if (name.toUpperCase().includes(filter)) {
+                    // Show item if it matches the search filter
+                    items[i].style.display = ""; 
+                } else {
+                    // Hide item if it does not match
+                    items[i].style.display = "none";
+                }
+            }
+        }
+        // --- END NEW SEARCH FUNCTIONALITY ---
+
+        
         // Logic to handle checkout button redirection
         document.addEventListener('DOMContentLoaded', function() {
             const proceedBtn = document.getElementById('proceedToCheckoutBtn');
@@ -458,6 +491,8 @@
                     window.location.href = 'checkout.html';
                 });
             }
+            
+            // Add data-product-name attributes to product items for filtering (already done in HTML above, but good practice to ensure consistency if items were dynamically loaded)
         });
     </script>
     </body>
