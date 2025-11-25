@@ -93,7 +93,7 @@
             <div class="col-12 col-md-3 col-lg-2 p-0">
                 <div class="sidebar d-flex flex-column">
                     <div class="sidebar-header mb-auto">
-<img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Enzo Perfumery Logo" class="sidebar-logo mb-3">
+<img src="https://avatars.githubusercontent.com/u/113776245?s=400&u=f7f681da8d58f45e8fbabf1b9ad5cf973f07ce2d&v=4" alt="Project Scents Logo" class="sidebar-logo mb-3">
                         <h3 class="fw-bold">Project Scents</h3>
                     </div>
                     <nav class="nav flex-column">
@@ -119,15 +119,15 @@
                 <section id="shop-items" class="main-content container my-5">
                     <h2 class="text-center mb-4">FOR WOMEN</h2>
                     
-                    <div class="row justify-content-center mb-5">
-                        <div class="col-md-8 col-lg-6">
+                    <div class="row mb-5 justify-content-center">
+                        <div class="col-lg-6 col-md-8 col-12">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="productSearch" onkeyup="filterProducts()" placeholder="Search Women's Perfumes...">
-                                <span class="input-group-text bg-white border-start-0"><i class="fas fa-search"></i>🔍</span>
+                                <input type="text" id="productSearchInput" class="form-control form-control-lg" placeholder="Search for a scent..." onkeyup="filterProducts()">
+                                <button class="btn btn-dark" type="button" onclick="filterProducts()">Search</button>
                             </div>
                         </div>
                     </div>
-                    <div class="row g-4" id="productGrid">
+                    <div class="row g-4" id="productList">
                         
                         <div class="col-md-4 col-sm-6 product-item" data-product-name="Chanel No. 5">
                             <a href="women-item-1.html">
@@ -498,3 +498,4 @@
     </body>
 
 </html>
+
