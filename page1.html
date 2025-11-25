@@ -115,13 +115,23 @@
                 <div class="container-fluid pt-3 pe-4 d-flex justify-content-end">
                     <button class="btn view-cart-btn" onclick="viewCart()">View Cart 🛒</button>
                 </div>
+                
                 <section id="shop-items" class="main-content container my-5">
-                    <h2 class="text-center mb-5">FOR MEN</h2>
-                    <div class="row g-4">
+                    <h2 class="text-center mb-4">FOR MEN</h2>
+                    
+                    <div class="row mb-5 justify-content-center">
+                        <div class="col-lg-6 col-md-8 col-12">
+                            <div class="input-group">
+                                <input type="text" id="productSearchInput" class="form-control form-control-lg" placeholder="Search for a scent..." onkeyup="filterProducts()">
+                                <button class="btn btn-dark" type="button" onclick="filterProducts()">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4" id="productList">
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item">
                             <a href="men-item-1.html">
-                                <img src="https://www.perfumestudiomnl.com/cdn/shop/products/image_c2a2b7d1-6bb1-4186-8905-4ba833ead6e6.jpg?v=1617461811" class="item-img" alt="Item 1">
+                                <img src="https://www.perfumestudiomnl.com/cdn/shop/products/image_c2a2b7d1-6bb1-4186-8905-4ba833ead6e6.jpg?v=1617461811" class="item-img" alt="Bleu De Chanel">
                             </a>
                             <div class="item-details">
                                 <h4 class="item-title">Bleu De Chanel</h4>
@@ -134,9 +144,9 @@
                                 </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item">
                             <a href="men-item-2.html">
-                                <img src="https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/2272645.jpg" class="item-img" alt="Item 2">
+                                <img src="https://rustans-thebeautysource.com/en/wp-content/uploads/2022/12/2272645.jpg" class="item-img" alt="Dior Sauvage">
                             </a>
                             <div class="item-details">
                                 <h4 class="item-title">Dior Sauvage</h4>
@@ -149,9 +159,9 @@
                                 </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item">
                             <a href="men-item-3.html">
-                                <img src="https://rustans-thebeautysource.com/en/wp-content/uploads/2024/09/3254397.jpg" class="item-img" alt="Item 3">
+                                <img src="https://rustans-thebeautysource.com/en/wp-content/uploads/2024/09/3254397.jpg" class="item-img" alt="Yves Saint Laurent Y EDP">
                             </a>
                             <div class="item-details">
                                 <h4 class="item-title">Yves Saint Laurent Y EDP</h4>
@@ -164,9 +174,9 @@
                                 </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item">
                             <a href="men-item-4.html">
-                                <img src="https://ifragranceofficial.com/wp-content/uploads/2023/01/rTJRtm1073334-0-global.jpeg" class="item-img" alt="Item 4">
+                                <img src="https://ifragranceofficial.com/wp-content/uploads/2023/01/rTJRtm1073334-0-global.jpeg" class="item-img" alt="Valentino Uomo Born In Roma Intense">
                             </a>
                             <div class="item-details">
                                 <h4 class="item-title">Valentino Uomo Born In Roma Intense</h4>
@@ -179,9 +189,9 @@
                                 </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item">
                             <a href="men-item-5.html">
-                                <img src="https://the-fragrance-shop.imgix.net/products/62902--new--.jpg?fm=webp" class="item-img" alt="Item 5">
+                                <img src="https://the-fragrance-shop.imgix.net/products/62902--new--.jpg?fm=webp" class="item-img" alt="Jean Paul Gaultier Le Male Elixir">
                             </a>
                             <div class="item-details">
                                 <h4 class="item-title">Jean Paul Gaultier Le Male Elixir</h4>
@@ -194,9 +204,9 @@
                                 </div>
                         </div>
                         
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-4 col-sm-6 product-item">
                             <a href="men-item-6.html">
-                                <img src="https://gordonsdirect.com/cdn/shop/files/3614274219548-5.gif?v=1738921159" class="item-img" alt="Item 6">
+                                <img src="https://gordonsdirect.com/cdn/shop/files/3614274219548-5.gif?v=1738921159" class="item-img" alt="Emporio Armani Stronger With You Parfum">
                             </a>
                             <div class="item-details">
                                 <h4 class="item-title">Emporio Armani Stronger With You Parfum</h4>
@@ -448,6 +458,32 @@
                 cartModal.show();
             }
         }
+        
+        // START: New Filter Logic
+        /**
+         * Filters the displayed product list based on the input in the search bar.
+         */
+        function filterProducts() {
+            // Get the search term and convert to lowercase for case-insensitive matching
+            const searchTerm = document.getElementById('productSearchInput').value.toLowerCase();
+            // Get all product item containers
+            const productItems = document.querySelectorAll('.product-item');
+
+            productItems.forEach(item => {
+                // Get the product title text
+                const title = item.querySelector('.item-title').textContent.toLowerCase();
+                
+                // Check if the product title contains the search term
+                if (title.includes(searchTerm)) {
+                    // Show the product if it matches
+                    item.style.display = '';
+                } else {
+                    // Hide the product if it doesn't match
+                    item.style.display = 'none';
+                }
+            });
+        }
+        // END: New Filter Logic
         
         // Logic to handle checkout button redirection
         document.addEventListener('DOMContentLoaded', function() {
